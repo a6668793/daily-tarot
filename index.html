@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE NARRATOR · 靈魂映畫</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@300;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #FAFAFA;
+            --surface-color: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-light: #959595;
+            --accent: #D4AF37;
+            --card-w: 300px;
+            --card-h: 520px;
+        }
+
+        body {
+            font-family: 'Lato', 'Noto Serif TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .gallery-wrapper {
+            width: 100%;
+            max-width: 900px;
+            background: var(--surface-color);
+            /* 極簡白色畫廊陰影 */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05); 
+            padding: 5rem 2rem;
+            margin: 2rem;
+            position: relative;
+        }
+
+        /* --- Header --- */
+        header { text-align: center; margin-bottom: 5rem; position: relative; }
+        header::after {
+            content: ''; display: block; width: 40px; height: 1px; 
+            background: #ddd; margin: 30px auto 0;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin: 0;
+            color: #111;
+        }
+        .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+        /* --- 輸入表單區 --- */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 三欄設計 */
+            gap: 30px;
+            align-items: end;
+        }
+
+        .input-group { position: relative; }
+        
+        .label-float {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        input, select {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            background: transparent;
+            outline: none;
+            color: var(--text-main);
+            border-radius: 0;
+            text-align: center;
+            text-align-last: center;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus { border-bottom-color: var(--text-main); }
+        input::placeholder { font-family: 'Lato'; font-size: 0.9rem; letter-spacing: 0.1em; color: #ddd; }
+
+        /* --- 水晶選擇區 --- */
+        .crystal-section {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .crystal-deck {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            min-height: 70px;
+        }
+
+        .gem {
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1), inset 2px 2px 8px rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.03);
+            opacity: 0;
+            animation: fadeInGem 0.8s forwards;
+        }
+        
+        @keyframes fadeInGem { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .gem:hover { transform: translateY(-5px) scale(1.1); }
+        .gem.selected { 
+            transform: scale(1.15); 
+            box-shadow: 0 0 0 5px var(--surface-color), 0 0 0 6px var(--text-main), 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* 真實水晶紋理 CSS */
+        .gem-clear { background: radial-gradient(circle at 30% 30%, #fff, #f4f4f4, #e0e0e0); }
+        .gem-amethyst { background: radial-gradient(circle at 30% 30%, #e6ccff, #9b59b6, #4a235a); }
+        .gem-rose { background: radial-gradient(circle at 40% 40%, #fff5f5, #ffccd5, #e099a8); }
+        .gem-obsidian { background: radial-gradient(circle at 35% 35%, #555, #111, #000); }
+        .gem-citrine { background: radial-gradient(circle at 30% 30%, #fffbe6, #f7dc6f, #b7950b); }
+        .gem-moon { background: radial-gradient(circle at 50% 50%, #fff, #e6e6fa, #c2c2d6); box-shadow: inset 0 0 15px rgba(100,149,237,0.2); }
+        .gem-tiger { background: linear-gradient(135deg, #3e2723, #8d6e63, #ffb74d, #5d4037); background-size: 200% 200%; }
+        .gem-aqua { background: radial-gradient(circle at 30% 30%, #e0ffff, #7fffd4, #20b2aa); }
+        .gem-lapis { background: radial-gradient(circle at 30% 30%, #6495ed, #000080, #191970); }
+        .gem-jade { background: radial-gradient(circle at 30% 30%, #98fb98, #3cb371, #2e8b57); }
+        .gem-ruby { background: radial-gradient(circle at 30% 30%, #ffcccc, #e74c3c, #922b21); }
+        .gem-sapphire { background: radial-gradient(circle at 30% 30%, #ccd1ff, #2980b9, #154360); }
+        .gem-opal { background: conic-gradient(from 45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1, #ff9a9e); filter: blur(0.5px); }
+        .gem-garnet { background: radial-gradient(circle at 30% 30%, #e6b0aa, #c0392b, #641e16); }
+        .gem-turquoise { background: radial-gradient(circle at 30% 30%, #afeeee, #48c9b0, #117864); }
+
+        .gem-info {
+            height: 20px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-refresh {
+            font-size: 0.7rem;
+            color: #ccc;
+            cursor: pointer;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .btn-refresh:hover { color: #999; border-bottom: 1px solid #999; }
+
+        .btn-main {
+            display: block;
+            margin: 0 auto;
+            padding: 18px 70px;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            font-family: 'Lato';
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .btn-main:hover { background: var(--text-main); color: #fff; }
+
+        /* --- 結果區 --- */
+        #result-view { display: none; flex-direction: column; align-items: center; width: 100%; }
+
+        .music-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 4rem;
+            opacity: 0.6;
+        }
+        .music-anim { width: 40px; height: 1px; background: #333; animation: pulse 1s infinite alternate; }
+        @keyframes pulse { from { width: 10px; } to { width: 40px; } }
+
+        .card-frame {
+            width: var(--card-w);
+            height: var(--card-h);
+            perspective: 1500px;
+            cursor: pointer;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+        
+        .card-inner {
+            width: 100%; height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+        }
+        .card-inner.flipped { transform: rotateY(180deg); }
+
+        .face {
+            position: absolute;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            background: #fff;
+            overflow: hidden;
+        }
+        
+        .back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #f2f2f2;
+        }
+        .back::after {
+            content: "THE NARRATOR";
+            writing-mode: vertical-rl;
+            letter-spacing: 0.5em;
+            font-family: 'Lato';
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+
+        .front { transform: rotateY(180deg); }
+        .ai-image {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0; 
+            transition: opacity 1.5s ease;
+        }
+        .loading-msg {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Playfair Display';
+            font-style: italic;
+            color: #aaa;
+            width: 80%;
+        }
+
+        /* 閱讀區 */
+        .reading-section {
+            width: 100%; max-width: 650px;
+            opacity: 0; transform: translateY(40px);
+            transition: all 1s 0.8s;
+        }
+        .reading-section.visible { opacity: 1; transform: translateY(0); }
+
+        .card-header { text-align: center; margin-bottom: 4rem; }
+        .title-en { font-family: 'Playfair Display'; font-size: 2.5rem; color: #111; margin-bottom: 10px; }
+        .title-ch { font-family: 'Noto Serif TC'; font-size: 1rem; color: #999; letter-spacing: 0.15em; }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 40px;
+        }
+        .grid-item { margin-bottom: 20px; }
+        .g-label { 
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; 
+            color: var(--text-light); display: block; margin-bottom: 12px; 
+        }
+        .g-text { 
+            font-size: 1rem; line-height: 1.8; color: #444; text-align: justify; 
+            font-family: 'Noto Serif TC';
+        }
+
+        @media (max-width: 768px) {
+            .form-container { grid-template-columns: 1fr; gap: 20px; }
+            .grid-layout { grid-template-columns: 1fr; gap: 30px; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-wrapper">
+        <header>
+            <h1>THE NARRATOR</h1>
+            <div class="subtitle">Soul Mirror & Blues Radio</div>
+        </header>
+
+        <div id="setup-panel">
+            
+            <div class="form-container">
+                <div class="input-group">
+                    <span class="label-float">Name / 姓名</span>
+                    <input type="text" id="username" placeholder="Enter Name">
+                </div>
+                <div class="input-group">
+                    <span class="label-float">Number / 靈魂數字</span>
+                    <input type="number" id="userNum" placeholder="1-99" min="1" max="99">
+                </div>
+                <div class="input-group">
+                    <span class="label-float">Zodiac / 星座</span>
+                    <select id="zodiac">
+                        <option value="" disabled selected>Select...</option>
+                        <option value="Aries">Aries / 牡羊座</option>
+                        <option value="Taurus">Taurus / 金牛座</option>
+                        <option value="Gemini">Gemini / 雙子座</option>
+                        <option value="Cancer">Cancer / 巨蟹座</option>
+                        <option value="Leo">Leo / 獅子座</option>
+                        <option value="Virgo">Virgo / 處女座</option>
+                        <option value="Libra">Libra / 天秤座</option>
+                        <option value="Scorpio">Scorpio / 天蠍座</option>
+                        <option value="Sagittarius">Sagittarius / 射手座</option>
+                        <option value="Capricorn">Capricorn / 摩羯座</option>
+                        <option value="Aquarius">Aquarius / 水瓶座</option>
+                        <option value="Pisces">Pisces / 雙魚座</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="crystal-section">
+                <span class="label-float" style="margin-bottom: 20px; display:block;">Select Your Soul Stone / 選擇靈魂水晶</span>
+                <div class="crystal-deck" id="gem-deck">
+                    </div>
+                <div class="gem-info" id="gem-label">Please choose one...</div>
+                <div class="btn-refresh" onclick="generateRandomCrystals()">↻ Shuffle Stones</div>
+            </div>
+
+            <button class="btn-main" onclick="revealDestiny()">Reveal Destiny</button>
+        </div>
+
+        <div id="result-view">
+            
+            <div class="music-bar">
+                <div class="music-anim"></div>
+                <span id="music-info" style="font-size: 0.8rem; font-family: 'Lato';">Blues Radio Tuning...</span>
+                <audio id="audio-player" loop crossorigin="anonymous"></audio>
+            </div>
+
+            <div class="card-frame" onclick="flipCard()">
+                <div class="card-inner" id="card-obj">
+                    <div class="face front">
+                        <div class="loading-msg" id="loader">
+                            Blending Crystal Energy<br>&<br>Classical Art...
+                        </div>
+                        <img id="ai-art" class="ai-image" alt="Soul Art">
+                    </div>
+                    <div class="face back"></div>
+                </div>
+            </div>
+
+            <div class="reading-section" id="reading-content">
+                <div class="card-header">
+                    <div class="title-en" id="res-en">The Empress</div>
+                    <div class="title-ch" id="res-ch">皇后 · 豐盛</div>
+                </div>
+
+                <div class="grid-layout">
+                    <div class="grid-item">
+                        <span class="g-label">Fortune / 運勢</span>
+                        <div class="g-text" id="txt-fortune"></div>
+                    </div>
+                    <div class="grid-item">
+                        <span class="g-label">Work / 事業</span>
+                        <div class="g-text" id="txt-work"></div>
+                    </div>
+                    <div class="grid-item">
+                        <span class="g-label">Crystal Energy / 能量</span>
+                        <div class="g-text" id="txt-energy"></div>
+                    </div>
+                    <div class="grid-item">
+                        <span class="g-label">Love / 愛情</span>
+                        <div class="g-text" id="txt-love"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. 水晶系統 (含 AI Prompt 描述)
+        // ==========================================
+        const allCrystals = [
+            { name: "Clear Quartz / 白水晶", class: "gem-clear", prompt: "pure white and translucent crystal aesthetic, ethereal light, minimalist, clarity" },
+            { name: "Amethyst / 紫水晶", class: "gem-amethyst", prompt: "purple mist atmosphere, mysterious, royal purple tones, spiritual, twilight" },
+            { name: "Rose Quartz / 粉晶", class: "gem-rose", prompt: "soft pastel pink color palette, romantic, gentle, dreamy, soft focus" },
+            { name: "Obsidian / 黑曜石", class: "gem-obsidian", prompt: "deep black and dark grey tones, high contrast, mysterious, sharp shadows, powerful" },
+            { name: "Citrine / 黃水晶", class: "gem-citrine", prompt: "golden yellow sunlight, warm glow, joyful, bright, abundance, radiance" },
+            { name: "Moonstone / 月光石", class: "gem-moon", prompt: "iridescent white and pale blue, magical moonlight, night sky, soft glow" },
+            { name: "Tiger's Eye / 虎眼石", class: "gem-tiger", prompt: "golden brown and earth tones, grounded, warm, texture, strength" },
+            { name: "Aquamarine / 海藍寶", class: "gem-aqua", prompt: "pale blue ocean colors, calm water, serene, clear sky, refreshing" },
+            { name: "Lapis Lazuli / 青金石", class: "gem-lapis", prompt: "deep royal blue with gold flecks, ancient, starry night, wisdom" },
+            { name: "Ruby / 紅寶石", class: "gem-ruby", prompt: "intense deep red, passion, dramatic lighting, bold, warmth" },
+            { name: "Sapphire / 藍寶石", class: "gem-sapphire", prompt: "dark blue, elegant, cold tones, sophisticated, noble" },
+            { name: "Opal / 蛋白石", class: "gem-opal", prompt: "holographic rainbow colors, dreamlike, fantasy, shimmering, prismatic" },
+            { name: "Garnet / 石榴石", class: "gem-garnet", prompt: "dark red wine colors, deep shadows, intense, vintage atmosphere" },
+            { name: "Turquoise / 土耳其石", class: "gem-turquoise", prompt: "vivid cyan and teal, earthy, nature, vibrant, exotic" },
+            { name: "Aventurine / 東菱玉", class: "gem-jade", prompt: "soft green nature tones, forest atmosphere, healing, organic" }
+        ];
+
+        let selectedGem = null;
+
+        function generateRandomCrystals() {
+            const shuffled = [...allCrystals].sort(() => 0.5 - Math.random());
+            const picked = shuffled.slice(0, 5);
+            
+            const container = document.getElementById('gem-deck');
+            container.innerHTML = ''; 
+            selectedGem = null;
+            document.getElementById('gem-label').innerText = "Please choose one...";
+            document.getElementById('gem-label').style.opacity = "0.5";
+
+            picked.forEach((g, idx) => {
+                const el = document.createElement('div');
+                el.className = `gem ${g.class}`;
+                el.style.animationDelay = `${idx * 0.1}s`; 
+                el.onclick = () => {
+                    document.querySelectorAll('.gem').forEach(x => x.classList.remove('selected'));
+                    el.classList.add('selected');
+                    selectedGem = g;
+                    const label = document.getElementById('gem-label');
+                    label.innerText = g.name;
+                    label.style.opacity = "1";
+                };
+                container.appendChild(el);
+            });
+        }
+        window.onload = generateRandomCrystals;
+
+        // ==========================================
+        // 2. 藍調靈魂樂播放列表 (隨機播放)
+        // ==========================================
+        const bluesPlaylist = [
+            { name: "Deep Soul Blues", url: "https://archive.org/download/OTRR_Frank_Race_Singles/Frank_Race_49-06-12_ep07_The_Adventure_Of_The_Roughneck.mp3" }, // Placeholder for vintage vibe
+            { name: "Midnight Piano", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3" },
+            { name: "Classic Jazz Vocal", url: "https://archive.org/download/mythium/JLS_-_01_-_Alone.mp3" },
+            { name: "Slow Blues Guitar", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Ziklibrenbib/The_Kyoto_Connection/The_Kyoto_Connection_-_09_-_Hachiko_The_Faithtful_Dog.mp3" } // Melancholic feel
+        ];
+
+        // ==========================================
+        // 3. 塔羅資料 (部分, AI 繪圖基礎)
+        // ==========================================
+        const deck = [
+            { en: "The Fool", ch: "愚者", prompt: "young traveler on cliff, dog, white rose, bright sun, carefree, classical oil painting" },
+            { en: "The Magician", ch: "魔術師", prompt: "wizard at table, cup sword wand pentacle, infinity sign, mystical garden, renaissance style" },
+            { en: "The High Priestess", ch: "女祭司", prompt: "mysterious priestess seated, veil, moon, pillars, scroll, sacred knowledge, fine art" },
+            { en: "The Empress", ch: "皇后", prompt: "beautiful queen on throne, nature, wheat field, crown of stars, luxury, fertility, classical art" },
+            { en: "The Emperor", ch: "皇帝", prompt: "king on stone throne, red robes, scepter, mountains, authority, stern face, oil painting" },
+            { en: "The Lovers", ch: "戀人", prompt: "adam and eve, angel, garden of eden, sunlight, romance, divine connection, classical masterpiece" },
+            { en: "The Hermit", ch: "隱士", prompt: "old man holding lantern, snowy mountain peak, solitude, star in lantern, night, realism" },
+            { en: "The Star", ch: "星星", prompt: "nude woman pouring water into pool, large yellow star, hope, serenity, beautiful landscape" },
+            { en: "The Moon", ch: "月亮", prompt: "moon with face, towers, wolf and dog, lobster, mystery, surreal classical painting" },
+            { en: "The Sun", ch: "太陽", prompt: "large sun with face, sunflowers, child on white horse, joy, success, vibrant oil painting" },
+            { en: "Death", ch: "死神", prompt: "skeleton knight on white horse, black armor, sunset, rebirth, dramatic classical art" },
+            { en: "The World", ch: "世界", prompt: "dancing figure in wreath, four elements, completion, wholeness, classical painting" }
+        ];
+
+        const fortunes = {
+            general: ["相信直覺，新的旅程即將展開。", "現在是採取行動的最佳時刻。", "保持耐心，一切都在正確的軌道上。", "意外的好消息將在近期出現。"],
+            work: ["專業能力受到肯定，適合提案。", "專注於長遠目標，勿短視近利。", "合作運佳，多與團隊溝通。", "創意靈感湧現，打破舊有框架。"],
+            love: ["敞開心扉，真誠的連結正在靠近。", "放下過去的包袱，迎接新生。", "溝通能化解誤會，增進感情。", "享受當下的甜蜜與平靜。"]
+        };
+
+        // ==========================================
+        // 4. 核心互動
+        // ==========================================
+        let currentCard = null;
+
+        function revealDestiny() {
+            const name = document.getElementById('username').value;
+            const num = document.getElementById('userNum').value;
+            const zodiac = document.getElementById('zodiac').value;
+
+            if(!name || !num || !zodiac || !selectedGem) {
+                alert("Please fill in all fields and select a Soul Stone.\n請填寫所有欄位並選擇一顆水晶。");
+                return;
+            }
+
+            // UI 轉場
+            document.getElementById('setup-panel').style.display = 'none';
+            document.getElementById('result-view').style.display = 'flex';
+
+            // 隨機播放藍調靈魂樂
+            const randomTrack = bluesPlaylist[Math.floor(Math.random() * bluesPlaylist.length)];
+            const audio = document.getElementById('audio-player');
+            audio.src = randomTrack.url;
+            audio.volume = 0.6;
+            audio.play().catch(e => console.log("Auto-play blocked"));
+            document.getElementById('music-info').innerText = `Now Playing: ${randomTrack.name}`;
+
+            // 抽牌
+            const randIdx = Math.floor(Math.random() * deck.length);
+            currentCard = deck[randIdx];
+
+            // AI 繪圖 (Pollinations.ai)
+            // 組合：牌面描述 + 古典畫風 + 水晶氛圍 + 隨機種子
+            const seed = Math.floor(Math.random() * 99999);
+            const prompt = `Tarot card ${currentCard.en}, ${currentCard.prompt}, ${selectedGem.prompt}, masterpiece, elegant, high detail, --seed ${seed}`;
+            const encoded = encodeURIComponent(prompt);
+            const aiUrl = `https://image.pollinations.ai/prompt/${encoded}?width=600&height=1040&nologo=true`;
+
+            // 預載圖片
+            const imgEl = document.getElementById('ai-art');
+            const loader = document.getElementById('loader');
+            imgEl.src = aiUrl;
+            imgEl.onload = () => {
+                loader.style.display = 'none';
+                imgEl.style.opacity = '1';
+            };
+
+            // 填寫內容
+            document.getElementById('res-en').innerText = currentCard.en;
+            document.getElementById('res-ch').innerText = `${currentCard.ch} · ${zodiac}`;
+            
+            document.getElementById('txt-fortune').innerText = fortunes.general[Math.floor(Math.random() * fortunes.general.length)];
+            document.getElementById('txt-work').innerText = fortunes.work[Math.floor(Math.random() * fortunes.work.length)];
+            // 能量文案結合水晶
+            document.getElementById('txt-energy').innerText = `透過${selectedGem.name}的共振，你的能量場呈現${selectedGem.prompt.split(',')[0]}的氛圍，靈魂數字${num}正在指引方向。`;
+            document.getElementById('txt-love').innerText = fortunes.general[Math.floor(Math.random() * fortunes.general.length)];
+        }
+
+        function flipCard() {
+            const cardObj = document.getElementById('card-obj');
+            if(cardObj.classList.contains('flipped')) return;
+
+            cardObj.classList.add('flipped');
+            document.getElementById('reading-content').classList.add('visible');
+            
+            const audio = document.getElementById('audio-player');
+            if(audio.paused) audio.play();
+        }
+    </script>
+</body>
+</html>
