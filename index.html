@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE NARRATOR · 靈魂映畫</title>
+    <title>THE NARRATOR · 極簡靈魂映畫</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@300;500&display=swap" rel="stylesheet">
@@ -36,7 +36,6 @@
             width: 100%;
             max-width: 900px;
             background: var(--surface-color);
-            /* 極簡白色畫廊陰影 */
             box-shadow: 0 30px 60px rgba(0,0,0,0.05); 
             padding: 5rem 2rem;
             margin: 2rem;
@@ -71,7 +70,7 @@
             max-width: 600px;
             margin: 0 auto 4rem auto;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr; /* 三欄設計 */
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 30px;
             align-items: end;
         }
@@ -253,7 +252,7 @@
             width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0; 
-            transition: opacity 1.5s ease;
+            transition: opacity 1s ease;
         }
         .loading-msg {
             position: absolute;
@@ -264,13 +263,15 @@
             font-style: italic;
             color: #aaa;
             width: 80%;
+            font-size: 0.9rem;
         }
 
-        /* 閱讀區 */
+        /* 閱讀區 - 修改為置中垂直排列 */
         .reading-section {
-            width: 100%; max-width: 650px;
+            width: 100%; max-width: 600px;
             opacity: 0; transform: translateY(40px);
             transition: all 1s 0.8s;
+            text-align: center; /* 整體置中 */
         }
         .reading-section.visible { opacity: 1; transform: translateY(0); }
 
@@ -278,26 +279,30 @@
         .title-en { font-family: 'Playfair Display'; font-size: 2.5rem; color: #111; margin-bottom: 10px; }
         .title-ch { font-family: 'Noto Serif TC'; font-size: 1rem; color: #999; letter-spacing: 0.15em; }
 
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+        /* 垂直排列容器 */
+        .vertical-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* 區塊間距 */
             border-top: 1px solid #f0f0f0;
             padding-top: 40px;
+            align-items: center; /* 子元素水平置中 */
         }
-        .grid-item { margin-bottom: 20px; }
+        .grid-item { 
+            margin-bottom: 10px; 
+            max-width: 500px; /* 限制文字寬度以利閱讀 */
+        }
         .g-label { 
-            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; 
-            color: var(--text-light); display: block; margin-bottom: 12px; 
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3em; 
+            color: var(--accent); display: block; margin-bottom: 15px; font-weight: 600;
         }
         .g-text { 
-            font-size: 1rem; line-height: 1.8; color: #444; text-align: justify; 
+            font-size: 1.05rem; line-height: 1.9; color: #444; 
             font-family: 'Noto Serif TC';
         }
 
         @media (max-width: 768px) {
             .form-container { grid-template-columns: 1fr; gap: 20px; }
-            .grid-layout { grid-template-columns: 1fr; gap: 30px; }
             h1 { font-size: 2.2rem; }
         }
     </style>
@@ -307,7 +312,7 @@
     <div class="gallery-wrapper">
         <header>
             <h1>THE NARRATOR</h1>
-            <div class="subtitle">Soul Mirror & Blues Radio</div>
+            <div class="subtitle">Minimalist Soul & Light Music</div>
         </header>
 
         <div id="setup-panel">
@@ -325,18 +330,18 @@
                     <span class="label-float">Zodiac / 星座</span>
                     <select id="zodiac">
                         <option value="" disabled selected>Select...</option>
-                        <option value="Aries">Aries / 牡羊座</option>
-                        <option value="Taurus">Taurus / 金牛座</option>
-                        <option value="Gemini">Gemini / 雙子座</option>
-                        <option value="Cancer">Cancer / 巨蟹座</option>
-                        <option value="Leo">Leo / 獅子座</option>
-                        <option value="Virgo">Virgo / 處女座</option>
-                        <option value="Libra">Libra / 天秤座</option>
-                        <option value="Scorpio">Scorpio / 天蠍座</option>
-                        <option value="Sagittarius">Sagittarius / 射手座</option>
-                        <option value="Capricorn">Capricorn / 摩羯座</option>
-                        <option value="Aquarius">Aquarius / 水瓶座</option>
-                        <option value="Pisces">Pisces / 雙魚座</option>
+                        <option value="Aries">牡羊座 Aries</option>
+                        <option value="Taurus">金牛座 Taurus</option>
+                        <option value="Gemini">雙子座 Gemini</option>
+                        <option value="Cancer">巨蟹座 Cancer</option>
+                        <option value="Leo">獅子座 Leo</option>
+                        <option value="Virgo">處女座 Virgo</option>
+                        <option value="Libra">天秤座 Libra</option>
+                        <option value="Scorpio">天蠍座 Scorpio</option>
+                        <option value="Sagittarius">射手座 Sagittarius</option>
+                        <option value="Capricorn">摩羯座 Capricorn</option>
+                        <option value="Aquarius">水瓶座 Aquarius</option>
+                        <option value="Pisces">雙魚座 Pisces</option>
                     </select>
                 </div>
             </div>
@@ -346,7 +351,7 @@
                 <div class="crystal-deck" id="gem-deck">
                     </div>
                 <div class="gem-info" id="gem-label">Please choose one...</div>
-                <div class="btn-refresh" onclick="generateRandomCrystals()">↻ Shuffle Stones</div>
+                <div class="btn-refresh" onclick="generateRandomCrystals()">↻ Refresh Stones</div>
             </div>
 
             <button class="btn-main" onclick="revealDestiny()">Reveal Destiny</button>
@@ -356,15 +361,15 @@
             
             <div class="music-bar">
                 <div class="music-anim"></div>
-                <span id="music-info" style="font-size: 0.8rem; font-family: 'Lato';">Blues Radio Tuning...</span>
-                <audio id="audio-player" loop crossorigin="anonymous"></audio>
+                <span id="music-info" style="font-size: 0.8rem; font-family: 'Lato';">Loading Light Music...</span>
+                <audio id="audio-player" loop crossorigin="anonymous" preload="auto"></audio>
             </div>
 
             <div class="card-frame" onclick="flipCard()">
                 <div class="card-inner" id="card-obj">
                     <div class="face front">
                         <div class="loading-msg" id="loader">
-                            Blending Crystal Energy<br>&<br>Classical Art...
+                            Generating minimalist art<br>based on your energy...
                         </div>
                         <img id="ai-art" class="ai-image" alt="Soul Art">
                     </div>
@@ -378,7 +383,7 @@
                     <div class="title-ch" id="res-ch">皇后 · 豐盛</div>
                 </div>
 
-                <div class="grid-layout">
+                <div class="vertical-layout">
                     <div class="grid-item">
                         <span class="g-label">Fortune / 運勢</span>
                         <div class="g-text" id="txt-fortune"></div>
@@ -387,11 +392,11 @@
                         <span class="g-label">Work / 事業</span>
                         <div class="g-text" id="txt-work"></div>
                     </div>
-                    <div class="grid-item">
-                        <span class="g-label">Crystal Energy / 能量</span>
-                        <div class="g-text" id="txt-energy"></div>
+                    <div class="grid-item" style="border-top: 1px dotted #eee; padding-top: 30px;">
+                        <span class="g-label" style="color: var(--text-main); font-size: 0.8rem;">Your Soul Energy Today / 今日靈魂能量</span>
+                        <div class="g-text" id="txt-energy" style="font-size: 1.15rem; font-weight: 500;"></div>
                     </div>
-                    <div class="grid-item">
+                    <div class="grid-item" style="border-top: 1px dotted #eee; padding-top: 30px;">
                         <span class="g-label">Love / 愛情</span>
                         <div class="g-text" id="txt-love"></div>
                     </div>
@@ -402,32 +407,41 @@
 
     <script>
         // ==========================================
-        // 1. 水晶系統 (含 AI Prompt 描述)
+        // 1. 資料庫設定
         // ==========================================
+        
+        // 水晶資料 (加入 energyText 用於解讀)
         const allCrystals = [
-            { name: "Clear Quartz / 白水晶", class: "gem-clear", prompt: "pure white and translucent crystal aesthetic, ethereal light, minimalist, clarity" },
-            { name: "Amethyst / 紫水晶", class: "gem-amethyst", prompt: "purple mist atmosphere, mysterious, royal purple tones, spiritual, twilight" },
-            { name: "Rose Quartz / 粉晶", class: "gem-rose", prompt: "soft pastel pink color palette, romantic, gentle, dreamy, soft focus" },
-            { name: "Obsidian / 黑曜石", class: "gem-obsidian", prompt: "deep black and dark grey tones, high contrast, mysterious, sharp shadows, powerful" },
-            { name: "Citrine / 黃水晶", class: "gem-citrine", prompt: "golden yellow sunlight, warm glow, joyful, bright, abundance, radiance" },
-            { name: "Moonstone / 月光石", class: "gem-moon", prompt: "iridescent white and pale blue, magical moonlight, night sky, soft glow" },
-            { name: "Tiger's Eye / 虎眼石", class: "gem-tiger", prompt: "golden brown and earth tones, grounded, warm, texture, strength" },
-            { name: "Aquamarine / 海藍寶", class: "gem-aqua", prompt: "pale blue ocean colors, calm water, serene, clear sky, refreshing" },
-            { name: "Lapis Lazuli / 青金石", class: "gem-lapis", prompt: "deep royal blue with gold flecks, ancient, starry night, wisdom" },
-            { name: "Ruby / 紅寶石", class: "gem-ruby", prompt: "intense deep red, passion, dramatic lighting, bold, warmth" },
-            { name: "Sapphire / 藍寶石", class: "gem-sapphire", prompt: "dark blue, elegant, cold tones, sophisticated, noble" },
-            { name: "Opal / 蛋白石", class: "gem-opal", prompt: "holographic rainbow colors, dreamlike, fantasy, shimmering, prismatic" },
-            { name: "Garnet / 石榴石", class: "gem-garnet", prompt: "dark red wine colors, deep shadows, intense, vintage atmosphere" },
-            { name: "Turquoise / 土耳其石", class: "gem-turquoise", prompt: "vivid cyan and teal, earthy, nature, vibrant, exotic" },
-            { name: "Aventurine / 東菱玉", class: "gem-jade", prompt: "soft green nature tones, forest atmosphere, healing, organic" }
+            { name: "Clear Quartz 白水晶", class: "gem-clear", prompt: "minimalist white abstract art, clean lines, translucent, ethereal light, pure", energyText: "淨化與清晰的能量，幫助你排除雜念，看清事物的本質。" },
+            { name: "Amethyst 紫水晶", class: "gem-amethyst", prompt: "minimalist purple abstract art, soft gradient, mysterious, spiritual, calm", energyText: "直覺與智慧的能量，引導你連結內在的聲音，保持平靜。" },
+            { name: "Rose Quartz 粉晶", class: "gem-rose", prompt: "minimalist soft pink abstract art, gentle curves, romantic, dreamy, warmth", energyText: "溫柔與愛的能量，提醒你先愛自己，再將這份溫暖分享給他人。" },
+            { name: "Obsidian 黑曜石", class: "gem-obsidian", prompt: "minimalist black and grey abstract art, high contrast geometric, powerful, deep, grounding", energyText: "守護與落實的能量，協助你抵擋負面影響，腳踏實地完成目標。" },
+            { name: "Citrine 黃水晶", class: "gem-citrine", prompt: "minimalist golden yellow abstract art, sun rays, bright, joyful, abundance", energyText: "自信與豐盛的能量，激發你的創造力，吸引美好的事物來到身邊。" },
+            { name: "Moonstone 月光石", class: "gem-moon", prompt: "minimalist iridescent white and blue abstract art, soft glow, magical, serene", energyText: "溫柔與直覺的能量，如同月光般照亮潛意識，帶來內心的寧靜。" },
+            { name: "Aquamarine 海藍寶", class: "gem-aqua", prompt: "minimalist pale blue abstract art, flowing lines like water, calm, refreshing, clear", energyText: "溝通與流動的能量，幫助你順暢地表達真實的想法，像水一樣靈活。" },
+            { name: "Lapis Lazuli 青金石", class: "gem-lapis", prompt: "minimalist deep royal blue abstract art, gold specks, ancient wisdom, starry", energyText: "洞察與真理的能量，提升你的覺知，做出最符合靈魂藍圖的決定。" },
+            { name: "Ruby 紅寶石", class: "gem-ruby", prompt: "minimalist deep red abstract art, bold strokes, passion, vitality, warmth", energyText: "熱情與活力的能量，點燃你對生活的渴望，勇敢追求所愛。" },
+            { name: "Jade 東菱玉", class: "gem-jade", prompt: "minimalist soft green abstract art, organic shapes, healing, growth, nature", energyText: "和諧與生長的能量，帶來身心的平衡，如同植物般穩定向上發展。" }
         ];
+
+        // 靈魂數字簡易解讀 (用於組合正能量文案)
+        const numberMeanings = {
+            1: "象徵新的開始與領導力，今天是採取行動的好時機。",
+            2: "代表平衡與合作，適合與人連結，在關係中找到和諧。",
+            3: "充滿創造力與表達欲，請大膽展現你的獨特想法。",
+            4: "強調穩定與秩序，按部就班能為你帶來安全感。",
+            5: "擁抱變化與自由，嘗試一點新鮮事物會帶來驚喜。",
+            6: "關乎愛與責任，照顧好自己與身邊的人。",
+            7: "適合內省與思考，花點時間與自己獨處對話。",
+            8: "專注於目標與顯化，你的努力將會看見成果。",
+            9: "代表智慧與完成，放下不再需要的，準備迎接下個階段。"
+        };
 
         let selectedGem = null;
 
         function generateRandomCrystals() {
             const shuffled = [...allCrystals].sort(() => 0.5 - Math.random());
             const picked = shuffled.slice(0, 5);
-            
             const container = document.getElementById('gem-deck');
             container.innerHTML = ''; 
             selectedGem = null;
@@ -452,31 +466,32 @@
         window.onload = generateRandomCrystals;
 
         // ==========================================
-        // 2. 藍調靈魂樂播放列表 (隨機播放)
+        // 2. 輕音樂播放列表 (Piano/Violin Light Music)
         // ==========================================
-        const bluesPlaylist = [
-            { name: "Deep Soul Blues", url: "https://archive.org/download/OTRR_Frank_Race_Singles/Frank_Race_49-06-12_ep07_The_Adventure_Of_The_Roughneck.mp3" }, // Placeholder for vintage vibe
-            { name: "Midnight Piano", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3" },
-            { name: "Classic Jazz Vocal", url: "https://archive.org/download/mythium/JLS_-_01_-_Alone.mp3" },
-            { name: "Slow Blues Guitar", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Ziklibrenbib/The_Kyoto_Connection/The_Kyoto_Connection_-_09_-_Hachiko_The_Faithtful_Dog.mp3" } // Melancholic feel
+        // 使用較小的檔案並預載以加快速度
+        const lightMusicPlaylist = [
+            { name: "Gentle Piano Flow", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kai_Engel/Chapter_One_-_Cold/Kai_Engel_-_04_-_Moonlight_Reprise.mp3" },
+            { name: "Soft Violin & Piano", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_03_-_Contention.mp3" },
+            { name: "Minimalist Piano", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_01_-_Algorithms.mp3" },
+            { name: "Ethereal Strings", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Rafael_Archangel/Found/Rafael_Archangel_-_05_-_Found.mp3" }
         ];
 
         // ==========================================
-        // 3. 塔羅資料 (部分, AI 繪圖基礎)
+        // 3. 塔羅與文案資料
         // ==========================================
         const deck = [
-            { en: "The Fool", ch: "愚者", prompt: "young traveler on cliff, dog, white rose, bright sun, carefree, classical oil painting" },
-            { en: "The Magician", ch: "魔術師", prompt: "wizard at table, cup sword wand pentacle, infinity sign, mystical garden, renaissance style" },
-            { en: "The High Priestess", ch: "女祭司", prompt: "mysterious priestess seated, veil, moon, pillars, scroll, sacred knowledge, fine art" },
-            { en: "The Empress", ch: "皇后", prompt: "beautiful queen on throne, nature, wheat field, crown of stars, luxury, fertility, classical art" },
-            { en: "The Emperor", ch: "皇帝", prompt: "king on stone throne, red robes, scepter, mountains, authority, stern face, oil painting" },
-            { en: "The Lovers", ch: "戀人", prompt: "adam and eve, angel, garden of eden, sunlight, romance, divine connection, classical masterpiece" },
-            { en: "The Hermit", ch: "隱士", prompt: "old man holding lantern, snowy mountain peak, solitude, star in lantern, night, realism" },
-            { en: "The Star", ch: "星星", prompt: "nude woman pouring water into pool, large yellow star, hope, serenity, beautiful landscape" },
-            { en: "The Moon", ch: "月亮", prompt: "moon with face, towers, wolf and dog, lobster, mystery, surreal classical painting" },
-            { en: "The Sun", ch: "太陽", prompt: "large sun with face, sunflowers, child on white horse, joy, success, vibrant oil painting" },
-            { en: "Death", ch: "死神", prompt: "skeleton knight on white horse, black armor, sunset, rebirth, dramatic classical art" },
-            { en: "The World", ch: "世界", prompt: "dancing figure in wreath, four elements, completion, wholeness, classical painting" }
+            { en: "The Fool", ch: "愚者", prompt: "minimalist abstract art, figure stepping off cliff, white rose, sun, clean lines, conceptual" },
+            { en: "The Magician", ch: "魔術師", prompt: "minimalist abstract art, geometric shapes representing elements, infinity symbol, creative force" },
+            { en: "The High Priestess", ch: "女祭司", prompt: "minimalist abstract art, veil, moon crescent, two pillars, deep wisdom, serene composition" },
+            { en: "The Empress", ch: "皇后", prompt: "minimalist abstract art, flowing organic shapes, nature, crown of stars, abundance, gentle curves" },
+            { en: "The Emperor", ch: "皇帝", prompt: "minimalist abstract art, strong geometric block structure, throne representation, authority, stability" },
+            { en: "The Lovers", ch: "戀人", prompt: "minimalist abstract art, two intertwining figures, connection, harmony, light, conceptual romance" },
+            { en: "The Hermit", ch: "隱士", prompt: "minimalist abstract art, single light source in darkness, solitary figure outline, introspection, wisdom" },
+            { en: "The Star", ch: "星星", prompt: "minimalist abstract art, large star shape pouring light, hope, calm waters, serene blue and white" },
+            { en: "The Moon", ch: "月亮", prompt: "minimalist abstract art, moon shapes, illusion, path between towers, mysterious, soft blur" },
+            { en: "The Sun", ch: "太陽", prompt: "minimalist abstract art, radiant sun circle, bright, warm colors, joy, simple positive shapes" },
+            { en: "Death", ch: "死神", prompt: "minimalist abstract art, abstract transition, end and beginning, white rose silhouette, transformation" },
+            { en: "The World", ch: "世界", prompt: "minimalist abstract art, complete circle, harmony of elements, fulfillment, wholeness conceptual" }
         ];
 
         const fortunes = {
@@ -489,41 +504,46 @@
         // 4. 核心互動
         // ==========================================
         let currentCard = null;
+        let selectedTrack = null;
 
         function revealDestiny() {
             const name = document.getElementById('username').value;
-            const num = document.getElementById('userNum').value;
+            const numStr = document.getElementById('userNum').value;
             const zodiac = document.getElementById('zodiac').value;
 
-            if(!name || !num || !zodiac || !selectedGem) {
+            if(!name || !numStr || !zodiac || !selectedGem) {
                 alert("Please fill in all fields and select a Soul Stone.\n請填寫所有欄位並選擇一顆水晶。");
                 return;
             }
+            const num = parseInt(numStr);
 
-            // UI 轉場
+            // 1. UI 轉場
             document.getElementById('setup-panel').style.display = 'none';
             document.getElementById('result-view').style.display = 'flex';
 
-            // 隨機播放藍調靈魂樂
-            const randomTrack = bluesPlaylist[Math.floor(Math.random() * bluesPlaylist.length)];
+            // 2. 快速啟動音樂 (立即播放)
+            selectedTrack = lightMusicPlaylist[Math.floor(Math.random() * lightMusicPlaylist.length)];
             const audio = document.getElementById('audio-player');
-            audio.src = randomTrack.url;
-            audio.volume = 0.6;
-            audio.play().catch(e => console.log("Auto-play blocked"));
-            document.getElementById('music-info').innerText = `Now Playing: ${randomTrack.name}`;
+            audio.src = selectedTrack.url;
+            audio.volume = 0.5;
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => { console.log("Auto-play blocked, click card to play."); });
+            }
+            document.getElementById('music-info').innerText = `Now Playing: ${selectedTrack.name}`;
 
-            // 抽牌
+            // 3. 抽牌
             const randIdx = Math.floor(Math.random() * deck.length);
             currentCard = deck[randIdx];
 
-            // AI 繪圖 (Pollinations.ai)
-            // 組合：牌面描述 + 古典畫風 + 水晶氛圍 + 隨機種子
+            // 4. AI 繪圖 (極簡風格 + 快速設定)
             const seed = Math.floor(Math.random() * 99999);
-            const prompt = `Tarot card ${currentCard.en}, ${currentCard.prompt}, ${selectedGem.prompt}, masterpiece, elegant, high detail, --seed ${seed}`;
+            // 使用較小的尺寸 (350x600) 以加快生成與傳輸速度
+            // 提示詞強調 "minimalist, abstract design"
+            const prompt = `minimalist abstract design art, ${currentCard.prompt}, ${selectedGem.prompt}, clean style, conceptual, high quality, --seed ${seed}`;
             const encoded = encodeURIComponent(prompt);
-            const aiUrl = `https://image.pollinations.ai/prompt/${encoded}?width=600&height=1040&nologo=true`;
+            const aiUrl = `https://image.pollinations.ai/prompt/${encoded}?width=350&height=600&nologo=true`;
 
-            // 預載圖片
             const imgEl = document.getElementById('ai-art');
             const loader = document.getElementById('loader');
             imgEl.src = aiUrl;
@@ -532,14 +552,26 @@
                 imgEl.style.opacity = '1';
             };
 
-            // 填寫內容
+            // 5. 填寫內容
             document.getElementById('res-en').innerText = currentCard.en;
             document.getElementById('res-ch').innerText = `${currentCard.ch} · ${zodiac}`;
             
             document.getElementById('txt-fortune').innerText = fortunes.general[Math.floor(Math.random() * fortunes.general.length)];
             document.getElementById('txt-work').innerText = fortunes.work[Math.floor(Math.random() * fortunes.work.length)];
-            // 能量文案結合水晶
-            document.getElementById('txt-energy').innerText = `透過${selectedGem.name}的共振，你的能量場呈現${selectedGem.prompt.split(',')[0]}的氛圍，靈魂數字${num}正在指引方向。`;
+            
+            // --- 核心修改：客製化正能量解讀 (水晶 + 數字) ---
+            // 計算數字總和的個位數 (例如 12 -> 3)
+            let soulDigit = num;
+            while (soulDigit > 9) {
+                soulDigit = String(soulDigit).split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            }
+            const numMsg = numberMeanings[soulDigit] || "擁有無限的潛能。";
+            // 組合文案
+            const combinedEnergyMsg = `今日你的靈魂數字「${num}」${numMsg}同時，你選擇了「${selectedGem.name.split(' ')[1]}」，它帶來${selectedGem.energyText}這股美好的共振將支持你以最正向的頻率度過今天。`;
+            
+            document.getElementById('txt-energy').innerText = combinedEnergyMsg;
+            // -------------------------------------------
+
             document.getElementById('txt-love').innerText = fortunes.general[Math.floor(Math.random() * fortunes.general.length)];
         }
 
